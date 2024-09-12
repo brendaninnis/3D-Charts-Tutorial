@@ -1,26 +1,30 @@
-//
-//  ContentView.swift
-//  3D Charts
-//
-//  Created by Brendan Innis on 2024-09-09.
-//
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
 
 struct ContentView: View {
+    @Environment(AppState.self) private var appState
+    
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
+        @Bindable var appState = appState
+        VStack(alignment: .leading) {
+            Text("3D Charts")
+                .font(.extraLargeTitle)
+                .padding(.bottom, Constants.verticalSpacing)
+            TextField("Chart Title", text: $appState.chartTitle)
+                .font(.title)
+                .frame(maxWidth: 480)
+                .padding(.bottom, Constants.verticalSpacing)
 
-            Text("Hello, world!")
         }
-        .padding()
+        .padding(EdgeInsets(top: Constants.verticalSpacing,
+                            leading: Constants.horizontalMargin,
+                            bottom: Constants.verticalSpacing,
+                            trailing: Constants.horizontalMargin))
     }
 }
 
-#Preview(windowStyle: .automatic) {
-    ContentView()
+#Preview {
+    return ContentView()
+        .glassBackgroundEffect()
+        .environment(AppState())
 }
