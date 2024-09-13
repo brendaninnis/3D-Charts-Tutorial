@@ -14,7 +14,8 @@ struct ContentView: View {
                 .font(.title)
                 .frame(maxWidth: 480)
                 .padding(.bottom, Constants.verticalSpacing)
-
+            Spreadsheet()
+                .padding(.bottom, Constants.verticalSpacing)
         }
         .padding(EdgeInsets(top: Constants.verticalSpacing,
                             leading: Constants.horizontalMargin,
@@ -24,7 +25,9 @@ struct ContentView: View {
 }
 
 #Preview {
+    let appState = AppState()
+    appState.preloadAppState()
     return ContentView()
         .glassBackgroundEffect()
-        .environment(AppState())
+        .environment(appState)
 }

@@ -15,6 +15,7 @@
 		0339F78F2C8F803400C2639F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F78E2C8F803400C2639F /* AppState.swift */; };
 		0339F7912C8F8A7F00C2639F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F7902C8F8A7F00C2639F /* Constants.swift */; };
 		0339F7932C8FA35A00C2639F /* ChartContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F7922C8FA35A00C2639F /* ChartContent.swift */; };
+		0339F7952C935A9800C2639F /* Spreadsheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F7942C935A9800C2639F /* Spreadsheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0339F78E2C8F803400C2639F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0339F7902C8F8A7F00C2639F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0339F7922C8FA35A00C2639F /* ChartContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContent.swift; sourceTree = "<group>"; };
+		0339F7942C935A9800C2639F /* Spreadsheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spreadsheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				0339F77F2C8F6C5000C2639F /* ThreeDeeChartsApp.swift */,
 				0339F7812C8F6C5000C2639F /* ContentView.swift */,
+				0339F7942C935A9800C2639F /* Spreadsheet.swift */,
 				0339F78E2C8F803400C2639F /* AppState.swift */,
 				0339F7922C8FA35A00C2639F /* ChartContent.swift */,
 				0339F7902C8F8A7F00C2639F /* Constants.swift */,
@@ -165,6 +168,7 @@
 			files = (
 				0339F78F2C8F803400C2639F /* AppState.swift in Sources */,
 				0339F7822C8F6C5000C2639F /* ContentView.swift in Sources */,
+				0339F7952C935A9800C2639F /* Spreadsheet.swift in Sources */,
 				0339F7802C8F6C5000C2639F /* ThreeDeeChartsApp.swift in Sources */,
 				0339F7932C8FA35A00C2639F /* ChartContent.swift in Sources */,
 				0339F7912C8F8A7F00C2639F /* Constants.swift in Sources */,
