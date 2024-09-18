@@ -3,7 +3,8 @@ import Foundation
 
 @Observable
 public class AppState {
-    var chartTitle: String = ""
+    var isShowingChart = false
+    var chartTitle = ""
     var chartContent: ChartContent = []
 }
 
