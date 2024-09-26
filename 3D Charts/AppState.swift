@@ -1,11 +1,13 @@
 
 import Foundation
+import RealityKit
 
 @Observable
 public class AppState {
     var isShowingChart = false
     var chartTitle = ""
     var chartContent: ChartContent = []
+    var chart = Entity()
 }
 
 #if DEBUG

@@ -8,10 +8,9 @@ struct ChartView: View {
 
     var body: some View {
         RealityView { content in
-            if let entity = await loadEntity() {
-                content.add(entity)
-                entity.transform.translation.y -= 0.1
-            }
+            content.add(appState.chart)
+        } update: { content in
+            appState.updateChart()
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomOrnament) {

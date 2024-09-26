@@ -1,5 +1,6 @@
 
 import Foundation
+import RealityKit
 
 /// Represents a cell in the chart
 @Observable
@@ -10,6 +11,8 @@ class ChartData {
     var floatValue: Float {
         Float(value) ?? 0
     }
+    /// Represents the data as a 3D object in a RealityKit scene
+    var entity: Entity?
     
     init(value: String) {
         self.value = value
