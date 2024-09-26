@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031B7F562CA4FD8E004B7AAE /* AppState+ChartDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031B7F552CA4FD8E004B7AAE /* AppState+ChartDrawing.swift */; };
 		0339F77E2C8F6C5000C2639F /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 0339F77D2C8F6C5000C2639F /* RealityKitContent */; };
 		0339F7802C8F6C5000C2639F /* ThreeDeeChartsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F77F2C8F6C5000C2639F /* ThreeDeeChartsApp.swift */; };
 		0339F7822C8F6C5000C2639F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0339F7812C8F6C5000C2639F /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031B7F552CA4FD8E004B7AAE /* AppState+ChartDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+ChartDrawing.swift"; sourceTree = "<group>"; };
 		0339F7782C8F6C5000C2639F /* 3D Charts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D Charts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0339F77C2C8F6C5000C2639F /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		0339F77F2C8F6C5000C2639F /* ThreeDeeChartsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDeeChartsApp.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				0339F7942C935A9800C2639F /* Spreadsheet.swift */,
 				0339F7962C951CE800C2639F /* ChartView.swift */,
 				0339F78E2C8F803400C2639F /* AppState.swift */,
+				031B7F552CA4FD8E004B7AAE /* AppState+ChartDrawing.swift */,
 				0339F7922C8FA35A00C2639F /* ChartContent.swift */,
 				0339F7902C8F8A7F00C2639F /* Constants.swift */,
 				0339F7832C8F6C5100C2639F /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0339F78F2C8F803400C2639F /* AppState.swift in Sources */,
+				031B7F562CA4FD8E004B7AAE /* AppState+ChartDrawing.swift in Sources */,
 				0339F7822C8F6C5000C2639F /* ContentView.swift in Sources */,
 				0339F7952C935A9800C2639F /* Spreadsheet.swift in Sources */,
 				0339F7972C951CE800C2639F /* ChartView.swift in Sources */,

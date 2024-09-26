@@ -8,6 +8,11 @@ public class AppState {
     var chartTitle = ""
     var chartContent: ChartContent = []
     var chart = Entity()
+
+    init() {
+        // Position the chart near the bottom of the volume
+        chart.transform.translation.y -= 0.23
+    }
 }
 
 #if DEBUG
