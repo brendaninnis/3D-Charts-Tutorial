@@ -27,7 +27,7 @@ extension AppState {
     /// The height of a bar in meters
     private var barHeight: Float { barSize * 5 }
     /// The size of the gutters in between the bars
-    private var barPadding: Float { barSize * 0.5 }
+    private var barPadding: Float { barSize * 0.8 }
     /// The minimum height of a bar
     private var minBarScale: Float { 0.042 }
     /// The distance between the edge of the base plate and the chart content
@@ -73,6 +73,8 @@ extension AppState {
                  maxChartValue: maxChartValue,
                  rowIndex: rowIndex)
         }
+
+        drawChartHeadings()
 
         if chartBoundsDidChange {
             basePlate?.removeFromParent()
@@ -180,24 +182,10 @@ extension AppState {
         // Create a new heading entity if needed
         _ = heading.entity ?? {
             chartBoundsDidChange = true
-            let mesh = MeshResource.generateText(heading.value,
-                                                 extrusionDepth: 2)
-            let colorMaterial = SimpleMaterial(color: .black,
-                                               isMetallic: false)
-            let entity = ModelEntity(mesh: mesh, materials: [colorMaterial])
-
-            // Store the heading value in the name to compare later
-            entity.name = heading.value
-
-            // Size the text appropriately for the chart
-            entity.scale *= 0.002
-
+            
+            let entity = createLabelEntity(forHeading: heading)
             chart.addChild(entity)
-
-            // Rotate the text by 90 degrees to lay flat
-            entity.orientation = simd_quatf(angle: -1 * .pi * 0.5,
-                                            axis: [1, 0, 0])
-
+            
             // Position the heading after the row
             let bounds = entity.visualBounds(relativeTo: nil).extents
             let cellSize = barSize + barPadding
@@ -206,14 +194,70 @@ extension AppState {
             entity.transform.translation.y = basePlateHeight * 0.5
             entity.transform.translation.x = rowMaxX + basePlatePadding * 0.25
             entity.transform.translation.z = rowZ + barSize - bounds.y
-
-            // Store the new entity in this ChartData
-            heading.entity = entity
-
+            
             return entity
         }()
     }
+    
+    private func createLabelEntity(forHeading heading: ChartData) -> Entity {
+        let mesh = MeshResource.generateText(heading.value,
+                                             extrusionDepth: 2)
+        let colorMaterial = SimpleMaterial(color: .black,
+                                           isMetallic: false)
+        let entity = ModelEntity(mesh: mesh, materials: [colorMaterial])
 
+        // Store the heading value in the name to compare later
+        entity.name = heading.value
+        // Size the text appropriately for the chart
+        entity.scale *= 0.002
+        // Rotate the text by 90 degrees to lay flat
+        entity.orientation = simd_quatf(angle: -1 * .pi * 0.5,
+                                        axis: [1, 0, 0])
+        // Store the new entity in this ChartData
+        heading.entity = entity
+
+        return entity
+    }
+    
+    private func drawChartHeadings() {
+        guard let headingsRow = chartContent.first else {
+            assertionFailure("A chart should always have at least one row")
+            return
+        }
+        
+        let rowCount = chartContent.count - 1
+        headingsRow.data.dropFirst().enumerated().forEach { colIndex, column in
+            // If the heading value changed, remove the entity and redraw
+            if let entity = column.entity, 
+               entity.name != column.value
+            {
+                chart.removeChild(entity)
+                column.entity = nil
+            }
+            
+            // Create a new heading entity if needed
+            _ = column.entity ?? {
+                chartBoundsDidChange = true
+                let entity = createLabelEntity(forHeading: column)
+                chart.addChild(entity)
+
+                // Position the heading row after the other rows
+                let bounds = entity.visualBounds(relativeTo: nil).extents
+                let cellSize = barSize + barPadding
+                let colX = cellSize * Float(colIndex) + barSize * 0.5
+                let colMaxZ = cellSize * Float(rowCount) - barPadding
+                let y = basePlateHeight * 0.5
+                let x = colX - bounds.x * 0.5
+                let z = colMaxZ + barSize * 0.5 + basePlatePadding * 0.25
+                entity.transform.translation.y = y
+                entity.transform.translation.x = x
+                entity.transform.translation.z = z
+                
+                return entity
+            }()
+        }
+    }
+    
     private func drawBasePlate(inBounds bounds: SIMD3<Float>) {
         // Add padding to the chart bounds
         let basePlateBounds = bounds + SIMD3<Float>(repeating: basePlatePadding)
