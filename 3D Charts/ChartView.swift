@@ -1,7 +1,7 @@
 
-import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftUI
 
 struct ChartView: View {
     @Environment(AppState.self) private var appState
@@ -9,12 +9,12 @@ struct ChartView: View {
     var body: some View {
         RealityView { content in
             content.add(appState.chart)
-        } update: { content in
+        } update: { _ in
             appState.updateChart()
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomOrnament) {
-                VStack (spacing: 12) {
+                VStack(spacing: 12) {
                     Text(appState.chartTitle)
                 }
             }
@@ -23,7 +23,7 @@ struct ChartView: View {
             appState.isShowingChart = false
         }
     }
-    
+
     private func loadEntity() async -> Entity? {
         try? await Entity(named: "Scene", in: realityKitContentBundle)
     }

@@ -6,11 +6,11 @@ struct ThreeDeeChartsApp: App {
     @State private var appState: AppState = {
         let appState = AppState()
         #if DEBUG
-        appState.preloadAppState()
+            appState.preloadAppState()
         #endif
         return appState
     }()
-    
+
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
 
@@ -18,7 +18,7 @@ struct ThreeDeeChartsApp: App {
         WindowGroup {
             ContentView()
                 .environment(appState)
-                .onChange(of: appState.isShowingChart) { oldValue, newValue in
+                .onChange(of: appState.isShowingChart) { _, newValue in
                     if newValue {
                         openWindow(id: .chartWindow)
                     } else {
@@ -27,7 +27,7 @@ struct ThreeDeeChartsApp: App {
                 }
         }
         .windowResizability(.contentSize)
-        
+
         WindowGroup(id: .chartWindow) {
             ChartView()
                 .environment(appState)

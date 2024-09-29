@@ -7,22 +7,24 @@ struct Spreadsheet: View {
     var body: some View {
         Grid(alignment: .leading,
              horizontalSpacing: Constants.cellBorderWidth,
-             verticalSpacing: Constants.cellBorderWidth) {
-            
+             verticalSpacing: Constants.cellBorderWidth)
+        {
             ForEach(Array(appState.chartContent.enumerated()),
-                    id: \.offset) { rowIndex, row in
-                
+                    id: \.offset)
+            { rowIndex, row in
+
                 GridRow {
                     ForEach(Array(row.data.enumerated()),
-                            id: \.offset) { colIndex, data in
-                        
+                            id: \.offset)
+                    { _, data in
+
                         @Bindable var data = data
                         TextField("", text: $data.value)
                             .frame(width: Constants.cellWidth,
                                    height: Constants.cellHeight)
                     }
                 }
-                
+
                 if rowIndex == 0 {
                     Divider()
                         .gridCellUnsizedAxes(.horizontal)
@@ -36,7 +38,7 @@ struct Spreadsheet: View {
     }
 }
 
-fileprivate extension Constants {
+private extension Constants {
     static let cellBorderWidth: CGFloat = 4
     static let cellWidth: CGFloat = 100
     static let cellHeight: CGFloat = 32

@@ -11,9 +11,10 @@ class ChartData {
     var floatValue: Float {
         Float(value) ?? 0
     }
+
     /// Represents the data as a 3D object in a RealityKit scene
     var entity: Entity?
-    
+
     init(value: String) {
         self.value = value
     }
@@ -24,7 +25,7 @@ class ChartData {
 class ChartRow {
     /// The data held in each column of this row
     var data: [ChartData]
-    
+
     init(data: [ChartData]) {
         self.data = data
     }
