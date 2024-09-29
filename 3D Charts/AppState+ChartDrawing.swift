@@ -182,10 +182,10 @@ extension AppState {
         // Create a new heading entity if needed
         _ = heading.entity ?? {
             chartBoundsDidChange = true
-            
+
             let entity = createLabelEntity(forHeading: heading)
             chart.addChild(entity)
-            
+
             // Position the heading after the row
             let bounds = entity.visualBounds(relativeTo: nil).extents
             let cellSize = barSize + barPadding
@@ -194,11 +194,11 @@ extension AppState {
             entity.transform.translation.y = basePlateHeight * 0.5
             entity.transform.translation.x = rowMaxX + basePlatePadding * 0.25
             entity.transform.translation.z = rowZ + barSize - bounds.y
-            
+
             return entity
         }()
     }
-    
+
     private func createLabelEntity(forHeading heading: ChartData) -> Entity {
         let mesh = MeshResource.generateText(heading.value,
                                              extrusionDepth: 2)
@@ -218,23 +218,23 @@ extension AppState {
 
         return entity
     }
-    
+
     private func drawChartHeadings() {
         guard let headingsRow = chartContent.first else {
             assertionFailure("A chart should always have at least one row")
             return
         }
-        
+
         let rowCount = chartContent.count - 1
-        headingsRow.data.dropFirst().enumerated().forEach { colIndex, column in
+        for (colIndex, column) in headingsRow.data.dropFirst().enumerated() {
             // If the heading value changed, remove the entity and redraw
-            if let entity = column.entity, 
+            if let entity = column.entity,
                entity.name != column.value
             {
                 chart.removeChild(entity)
                 column.entity = nil
             }
-            
+
             // Create a new heading entity if needed
             _ = column.entity ?? {
                 chartBoundsDidChange = true
@@ -252,12 +252,12 @@ extension AppState {
                 entity.transform.translation.y = y
                 entity.transform.translation.x = x
                 entity.transform.translation.z = z
-                
+
                 return entity
             }()
         }
     }
-    
+
     private func drawBasePlate(inBounds bounds: SIMD3<Float>) {
         // Add padding to the chart bounds
         let basePlateBounds = bounds + SIMD3<Float>(repeating: basePlatePadding)
