@@ -8,6 +8,7 @@ public class AppState {
     var chartTitle = ""
     var chartContent: ChartContent = []
     var chart = Entity()
+    var basePlate: Entity?
 
     init() {
         // Position the chart near the bottom of the volume

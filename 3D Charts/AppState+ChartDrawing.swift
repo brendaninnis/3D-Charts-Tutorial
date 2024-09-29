@@ -30,6 +30,10 @@ extension AppState {
     private var barPadding: Float { barSize * 0.5 }
     /// The minimum height of a bar
     private var minBarScale: Float { 0.042 }
+    /// The distance between the edge of the base plate and the chart content
+    private var basePlatePadding: Float { 0.1 }
+    /// The thickness of the base plate
+    private var basePlateHeight: Float { 0.02 }
     
     private enum ChartColors {
         case red
@@ -72,11 +76,13 @@ extension AppState {
         
         if chartBoundsDidChange {
             let bounds = chart.visualBounds(relativeTo: nil).extents
-                        
-            // Position the chart in the middle of the volumne
+
+            drawBasePlate(inBounds: bounds)
+
+            // Position the middle of the chart in the middle of the volumne
             chart.transform.translation.x = -1 * bounds.x * 0.5
             chart.transform.translation.z = -1 * bounds.z * 0.5
-            
+
             chartBoundsDidChange = false
         }
     }
@@ -149,5 +155,28 @@ extension AppState {
                 entity.playAnimation(res)
             }
         }
+    }
+
+    private func drawBasePlate(inBounds bounds: SIMD3<Float>) {
+        basePlate?.removeFromParent()
+
+        // Add padding to the chart bounds
+        let basePlateBounds = bounds + SIMD3<Float>(repeating: basePlatePadding)
+
+        let mesh = MeshResource.generateBox(width: basePlateBounds.x,
+                                            height: basePlateHeight,
+                                            depth: basePlateBounds.z,
+                                            cornerRadius: basePlateHeight * 0.5)
+        let colorMaterial = SimpleMaterial(color: .white,
+                                           roughness: 0.1,
+                                           isMetallic: false)
+        let basePlate = ModelEntity(mesh: mesh, materials: [colorMaterial])
+        chart.addChild(basePlate)
+
+        // Position the middle of the base plate in the middle of the chart
+        basePlate.transform.translation.x += bounds.x * 0.5
+        basePlate.transform.translation.z += bounds.z * 0.5
+
+        self.basePlate = basePlate
     }
 }
