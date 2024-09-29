@@ -75,6 +75,8 @@ extension AppState {
         }
 
         if chartBoundsDidChange {
+            basePlate?.removeFromParent()
+
             let bounds = chart.visualBounds(relativeTo: nil).extents
 
             drawBasePlate(inBounds: bounds)
@@ -176,7 +178,7 @@ extension AppState {
         }
 
         // Create a new heading entity if needed
-        let entity = heading.entity ?? {
+        _ = heading.entity ?? {
             chartBoundsDidChange = true
             let mesh = MeshResource.generateText(heading.value,
                                                  extrusionDepth: 2)
@@ -213,8 +215,6 @@ extension AppState {
     }
 
     private func drawBasePlate(inBounds bounds: SIMD3<Float>) {
-        basePlate?.removeFromParent()
-
         // Add padding to the chart bounds
         let basePlateBounds = bounds + SIMD3<Float>(repeating: basePlatePadding)
 
